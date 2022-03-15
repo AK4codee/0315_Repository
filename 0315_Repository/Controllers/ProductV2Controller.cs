@@ -41,7 +41,15 @@ namespace _0315_Repository.Controllers
         public IActionResult Detail(int id)
         {
             var product = _productService.GetProductById(id);
-            return View(product);
+
+            ProductDetailViewModel productDetailViewModel = new ProductDetailViewModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                IsPromotion = product.IsPromotion
+            };
+            return View(productDetailViewModel);
         }
 
         [HttpGet]
