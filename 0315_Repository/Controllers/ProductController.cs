@@ -1,5 +1,7 @@
 ﻿using _0315_Repository.Models;
+using _0315_Repository.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace _0315_Repository.Controllers
 {
@@ -13,24 +15,33 @@ namespace _0315_Repository.Controllers
 
         public IActionResult Promotion()
         {
-            return View();
+            var PromotionList = MockData.productList.Where(x => x.IsPromotion == true);
+            return View(PromotionList);
         }
 
-        public IActionResult Detail()
+        public IActionResult Detail(int id)
         {
-            return View();
+            var Product = MockData.productList.FirstOrDefault(x => x.Id == id);
+            return View(Product);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View();
+            var Product = MockData.productList.FirstOrDefault(x => x.Id == id);
+            return View(Product);
         }
 
         [HttpPost]
-        public IActionResult Edit()
+        public IActionResult Edit(Product product)
         {
-            return View();
+            var EditProduct = MockData.productList.FirstOrDefault(x => x.Id == product.Id);
+
+            EditProduct.Name = product.Name;
+            EditProduct.Price = product.Price;
+            EditProduct.IsPromotion = product.IsPromotion;
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
