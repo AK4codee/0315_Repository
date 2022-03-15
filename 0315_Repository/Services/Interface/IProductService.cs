@@ -1,4 +1,5 @@
-﻿using _0315_Repository.Models.Entity;
+﻿using _0315_Repository.Models.DTO.Product;
+using _0315_Repository.Models.Entity;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,14 +7,14 @@ namespace _0315_Repository.Services.Interface
 {
     public interface IProductService
     {
-        IEnumerable<Product> GetAll();
+        IEnumerable<GetAllDto> GetAll();
 
-        Product GetProductById(int id);
+        GetProductByIdDto GetProductById(int id);
 
-        IEnumerable<Product> GetPromotion();
+        IEnumerable<GetPromotionDto> GetPromotion();
 
-        bool UpdateProduct(Product product);
+        bool UpdateProduct(UpdateProductDto product);
 
-        IEnumerable<Product> SortByPrice();
+        IEnumerable<SortByPriceDto> SortByPrice();
     }
 }
