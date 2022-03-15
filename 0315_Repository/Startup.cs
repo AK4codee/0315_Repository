@@ -1,5 +1,7 @@
 using _0315_Repository.Repositorys;
 using _0315_Repository.Repositorys.Interface;
+using _0315_Repository.Services;
+using _0315_Repository.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +31,9 @@ namespace _0315_Repository
 
             // Repository ª`¤J
             services.AddTransient<IProductRepository, ProductRepository>();
+
+            // Service ª`¤J
+            services.AddTransient<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
