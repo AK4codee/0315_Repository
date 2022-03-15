@@ -13,18 +13,29 @@ namespace _0315_Repository.Controllers
         public ProductV2Controller(IProductService productService)
         {
             _productService = productService;
+            _BannerService = BannerService;
+            _ActivityService = ActivityService;
+            _RecommendService = RecommendService;
         }
         public IActionResult Index()
         {
-            var productList = _productService.GetAll().Select(x => new ProductViewModel()
+            ProductViewModel productViewModel = new ProductViewModel()
             {
-                Id = x.Id,
-                Name = x.Name,
-                Price = x.Price,
-                IsPromotion = x.IsPromotion
-            });
+                BannerList = ,
+                ActivityList = ,
+                RecommendList =
+            };
+            return View();
 
-            return View(productList);
+            //var productList = _productService.GetAll().Select(x => new ProductViewModel()
+            //{
+            //    Id = x.Id,
+            //    Name = x.Name,
+            //    Price = x.Price,
+            //    IsPromotion = x.IsPromotion
+            //});
+
+            //return View(productList);
         }
         public IActionResult Promotion()
         {
