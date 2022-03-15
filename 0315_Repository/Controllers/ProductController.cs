@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using _0315_Repository.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace _0315_Repository.Controllers
 {
@@ -6,7 +7,8 @@ namespace _0315_Repository.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var productList = MockData.productList;
+            return View(productList);
         }
 
         public IActionResult Promotion()
