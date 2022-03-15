@@ -1,7 +1,9 @@
 ﻿using _0315_Repository.Models.DTO.Product;
 using _0315_Repository.Models.Entity;
+using _0315_Repository.Models.ViewModels.Product;
 using _0315_Repository.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace _0315_Repository.Controllers
 {
@@ -14,12 +16,26 @@ namespace _0315_Repository.Controllers
         }
         public IActionResult Index()
         {
-            var productList = _productService.GetAll();
+            var productList = _productService.GetAll().Select(x => new ProductViewModel()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Price = x.Price,
+                IsPromotion = x.IsPromotion
+            });
+
             return View(productList);
         }
         public IActionResult Promotion()
         {
-            var productList = _productService.GetPromotion();
+            var productList = _productService.GetPromotion().Select(x => new ProductViewModel()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Price = x.Price,
+                IsPromotion = x.IsPromotion
+            });
+
             return View(productList);
         }
         public IActionResult Detail(int id)
@@ -32,11 +48,18 @@ namespace _0315_Repository.Controllers
         public IActionResult Edit(int id)
         {
             var product = _productService.GetProductById(id);
-            return View(product);
+            ProductEditViewModel productEditViewModel = new ProductEditViewModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                IsPromotion = product.IsPromotion
+            };
+            return View(productEditViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductEditViewModel product)
         {
             UpdateProductDto updateProductDto = new UpdateProductDto()
             {
