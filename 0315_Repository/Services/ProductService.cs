@@ -1,4 +1,5 @@
-﻿using _0315_Repository.Models.DTO.Product;
+﻿using _0315_Repository.Commom.Enum;
+using _0315_Repository.Models.DTO.Product;
 using _0315_Repository.Models.Entity;
 using _0315_Repository.Repositorys.Interface;
 using _0315_Repository.Services.Interface;
@@ -49,15 +50,25 @@ namespace _0315_Repository.Services
              });
         }
 
-        public IEnumerable<SortByPriceDto> SortByPrice()
+        public IEnumerable<SortByPriceDto> SortByPrice(ProductEnum.SortEnum sortType)
         {
-            return _productRepository.GetAll().OrderByDescending(x => x.Price).Select(x => new SortByPriceDto()
+            var productList = _productRepository.GetAll().Select(x => new SortByPriceDto()
             {
                 Id = x.Id,
                 Name = x.Name,
                 Price = x.Price,
                 IsPromotion = x.IsPromotion
             });
+
+            switch(sortType)
+            {
+                case ProductEnum.SortEnum.Asc:
+                    return productList.OrderBy(x => x.Price);
+                case ProductEnum.SortEnum.Desc:
+                    return productList.OrderByDescending(x => x.Price);
+                default:
+                    return productList;
+            }
         }
 
         public bool UpdateProduct(UpdateProductDto product)

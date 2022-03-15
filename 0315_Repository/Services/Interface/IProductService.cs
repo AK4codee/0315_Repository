@@ -1,4 +1,5 @@
-﻿using _0315_Repository.Models.DTO.Product;
+﻿using _0315_Repository.Commom.Enum;
+using _0315_Repository.Models.DTO.Product;
 using _0315_Repository.Models.Entity;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,6 @@ namespace _0315_Repository.Services.Interface
 
         bool UpdateProduct(UpdateProductDto product);
 
-        IEnumerable<SortByPriceDto> SortByPrice();
+        IEnumerable<SortByPriceDto> SortByPrice(ProductEnum.SortEnum sortType);
     }
 }
