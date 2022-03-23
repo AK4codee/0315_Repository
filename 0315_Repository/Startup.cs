@@ -1,3 +1,4 @@
+using _0315_Repository.Models;
 using _0315_Repository.Repositorys;
 using _0315_Repository.Repositorys.Interface;
 using _0315_Repository.Services;
@@ -5,6 +6,7 @@ using _0315_Repository.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,12 @@ namespace _0315_Repository
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //µù¥U¸ê®Æ®w
+            services.AddDbContext<MyDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("ProductDB"));
+            });
 
             // Repository ª`¤J
             services.AddTransient<IProductRepository, ProductRepository>();
