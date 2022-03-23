@@ -28,7 +28,7 @@ namespace _0315_Repository.Controllers
         }
         public IActionResult Promotion()
         {
-            var productList = _productService.GetPromotion().Select(x => new ProductViewModel()
+            var productList = _productService.GetPromotion().Select(x => new ProductPromotionViewModel()
             {
                 Id = x.Id,
                 Name = x.Name,

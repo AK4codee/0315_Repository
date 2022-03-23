@@ -1,5 +1,6 @@
 ﻿using _0315_Repository.Models.Entity;
 using Microsoft.EntityFrameworkCore;
+using _0315_Repository.Models.ViewModels.Product;
 
 namespace _0315_Repository.Models
 {
@@ -21,5 +22,7 @@ namespace _0315_Repository.Models
                 new Product() { Id = 6, Name = "飲料", Price = 60, IsPromotion = true, CreateUser = "B" },
             });
         }
+
+        public DbSet<_0315_Repository.Models.ViewModels.Product.ProductPromotionViewModel> ProductPromotionViewModel { get; set; }
     }
 }
