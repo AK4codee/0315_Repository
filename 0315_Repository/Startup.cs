@@ -6,12 +6,14 @@ using _0315_Repository.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,8 +39,17 @@ namespace _0315_Repository
                 options.UseSqlServer(Configuration.GetConnectionString("ProductDB"));
             });
 
+            //µù¥UDapper
+            services.AddScoped<IDbConnection, SqlConnection>(serviceProvider =>
+            {
+                SqlConnection connection = new SqlConnection();
+                connection.ConnectionString = Configuration.GetConnectionString("ProductDB");
+                return connection;
+            });
+
             // Repository ª`¤J
-            services.AddTransient<IProductRepository, ProductRepository>();
+            //services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductRepository, DapperProductRepository>();
 
             // Service ª`¤J
             services.AddTransient<IProductService, ProductService>();
