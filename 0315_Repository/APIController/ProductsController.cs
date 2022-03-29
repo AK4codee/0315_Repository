@@ -28,7 +28,10 @@ namespace _0315_Repository.APIController
             _service = service;
         }
 
-        // GET: api/Products
+        /// <summary>
+        /// AAA
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetProducts()
         {
@@ -45,6 +48,11 @@ namespace _0315_Repository.APIController
         }
 
         // GET: api/Products/5
+        /// <summary>
+        /// GG
+        /// </summary>
+        /// <param name="id">SSS</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
